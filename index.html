@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width= , initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+  }
+
+  #input_box {
+    margin-top: 20px;
+    width: 30%;
+    height: 30px;
+
+  }
+
+  h2 {
+    background-color: aquamarine;
+    margin-top: 20px;
+    font-size: 2.5vw;
+  }
+
+  #time_box {
+    margin-top: 20px;
+    width: 30%;
+    height: 30px;
+
+  }
+
+  .btns {
+    width: 30%;
+    padding: 5px;
+    /* height: 20px; */
+    color: rgb(247, 247, 250);
+    background-color: rgba(10, 10, 166, 0.73);
+  }
+
+  .Inp {
+    /* width: 40%; */
+    /* height: 200px; */
+    /* border:2px black solid; */
+  }
+
+  #cap {
+    font-weight: bold;
+    font-size: 1.5vw;
+    background-color: aqua;
+  }
+
+  .Main_container {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    /* background-color: aqua; */
+    justify-content: space-around;
+  }
+
+  .Table1 {
+    width: 50%;
+
+    /* background-color: green; */
+  }
+
+  thead {
+    background-color: #4C4CBE;
+    color: white;
+  }
+
+  table {
+    width: 80%;
+  }
+
+  td {
+    background-color: aliceblue;
+  }
+
+  .Table2 {
+    /* background-color: bisque; */
+    width: 50%;
+  }
+
+  .reds {
+    background-color: green;
+    color: white;
+    border: none;
+    text-align: center;
+  }
+  
+  .redss {
+    background-color: red;
+    color: white;
+    border: none;
+    text-align: center;
+
+    
+  }
+</style>
+
+<body>
+  <center>
+    <h2>To-DO List</h2>
+    <div class="Inp">
+
+      <input type="text" id="input_box" placeholder="set your tasks"><br><br>
+      <input type="datetime-local" id="time_box" placeholder="set your time"><br><br>
+
+
+      <button class="btns" onclick="submit()">Submit</button>
+
+    </div>
+  </center>
+
+  <div class="Main_container">
+    <div class="Table1">
+      <center>
+        <h3 id="cap">TODAYS TASK📃</h3>
+
+        <table border="1" id="tbl_1"> <br><br>
+
+        </table>
+      </center>
+    </div>
+    <div class="Table2">
+      <center>
+        <h3 id="cap">COMPLETE TASK ✅</h3>
+        <table border="1" id="tbl_2"> <br><br>
+
+        </table>
+      </center>
+    </div>
+  </div>
+
+</body>
+<script>
+  var head = "<thead><th>time</th><th>Task</th><th>Complete</th></thead>";
+  var tbl_data = head;
+  function submit() {
+
+    var n = document.getElementById("input_box").value;
+    var m = document.getElementById("time_box").value;
+    if (!(n == "" && m == "")) {
+      tbl_data += "<tr><td>" + m + "</td><td>" + n + "</td><td class ='reds'><button class ='reds' onclick ='Done(this)'>Done</td></button></tr>";
+      document.getElementById("tbl_1").innerHTML = tbl_data;
+      document.getElementById("input_box").value = "";
+      document.getElementById("time_box").value = "";
+    }
+  }
+
+  var h = "<thead><th  colspan='3'>COMPLETED👌</th></thead>";
+  var tab = h;
+  function Done(data) {
+    
+    var d = data.parentElement.parentElement.children[0].innerHTML;
+    var t = data.parentElement.parentElement.children[1].innerHTML;
+
+    tab += "<tr><td>" + d + "</td><td>" + t + "</td><td class ='redss'><button class ='redss' onclick ='cancel(this)'>Delete</button></td></tr>";
+    document.getElementById("tbl_2").innerHTML = tab;
+    data.parentElement.parentElement.remove();
+    tbl_data = head;
+  }
+
+  function cancel(deletes){
+    deletes.parentElement.parentElement.remove();
+   tab = h;
+
+
+  }
+</script>
+
+</html>
